@@ -2,6 +2,7 @@ import datetime
 import os
 import pandas as pd
 import requests
+import time
 
 from src.data.cache import get_cache
 from src.data.models import (
@@ -114,6 +115,7 @@ def search_line_items(
         "limit": limit,
     }
     response = requests.post(url, headers=headers, json=body)
+    time.sleep(1)
     if response.status_code != 200:
         raise Exception(f"Error fetching data: {ticker} - {response.status_code} - {response.text}")
     data = response.json()
